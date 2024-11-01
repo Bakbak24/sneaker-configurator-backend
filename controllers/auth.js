@@ -62,7 +62,34 @@ const login = async (req, res, next) => {
   }
 };
 
+const updatePassword = async (req, res, next) => {
+  try {
+    const { userId, newPassword } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+
+    await user.setPassword(newPassword);
+    await user.save();
+
+    res.json({
+      status: "success",
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   signup,
   login,
+  updatePassword,
 };
