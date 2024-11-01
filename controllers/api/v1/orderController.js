@@ -4,7 +4,6 @@ const index = async (req, res) => {
   try {
     const sortBy = req.query.sortby === "date" ? { createdAt: -1 } : {};
     const orders = await Order.find().sort(sortBy);
-
     res.json({
       status: "success",
       data: {
@@ -73,7 +72,7 @@ const update = async (req, res) => {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true }
+      { new: true, runValidators: true }
     );
     if (!updatedOrder) {
       return res.json({
