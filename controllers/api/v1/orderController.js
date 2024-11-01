@@ -78,15 +78,31 @@ const getOrderById = async (req, res) => {
   }
 };
 
-const create = (req, res) => {
-  res.json({
-    status: "success",
-    data: {
-      order: {
-        text: "Order created",
+const create = async (req, res) => {
+  try {
+    const newOrder = new Order({
+      customerName: req.body.customerName,
+      customerEmail: req.body.customerEmail,
+      shoeSize: req.body.shoeSize,
+      laceColor: req.body.laceColor,
+      soleColor: req.body.soleColor,
+      extraOptions: req.body.extraOptions,
+      status: req.body.status || "in productie",
+    });
+
+    const savedOrder = await newOrder.save();
+    res.json({
+      status: "success",
+      data: {
+        order: savedOrder,
       },
-    },
-  });
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 };
 
 const update = (req, res) => {
