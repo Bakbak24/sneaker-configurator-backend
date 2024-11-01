@@ -2,7 +2,9 @@ const Order = require("../../../models/Order");
 
 const index = async (req, res) => {
   try {
-    const orders = await Order.find();
+    const sortBy = req.query.sortby === "date" ? { createdAt: -1 } : {};
+    const orders = await Order.find().sort(sortBy);
+
     res.json({
       status: "success",
       data: {
