@@ -10,7 +10,7 @@ const signup = async (req, res, next) => {
     console.log(user);
     let token = jwt.sign(
       { uid: user._id, username: user.username },
-      config.get("jwt.secret")
+      process.env.secretsauce || config.get("jwt.secret")
     );
     res.json({
       status: "success",
@@ -45,7 +45,7 @@ const login = async (req, res, next) => {
 
       let token = jwt.sign(
         { uid: user._id, username: user.username },
-        config.get("jwt.secret")
+        process.env.secretsauce || config.get("jwt.secret")
       );
 
       res.json({
