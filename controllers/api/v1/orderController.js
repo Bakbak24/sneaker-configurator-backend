@@ -105,16 +105,33 @@ const create = async (req, res) => {
   }
 };
 
-const update = (req, res) => {
-  res.json({
-    status: "success",
-    data: {
-      order: {
-        id: req.params.id,
-        text: "Order updated",
+const update = async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedOrder) {
+      return res.json({
+        status: "fail",
+        data: {
+          message: "Order not found",
+        },
+      });
+    }
+    res.json({
+      status: "success",
+      data: {
+        order: updatedOrder,
       },
-    },
-  });
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 };
 
 const remove = (req, res) => {
