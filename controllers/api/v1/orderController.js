@@ -53,15 +53,29 @@ const index = async (req, res) => {
   }
 };
 
-const getOrderById = (req, res) => {
-  res.json({
-    status: "success",
-    data: {
-      order: {
-        id: req.params.id,
+const getOrderById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.json({
+        status: "fail",
+        data: {
+          message: "Order not found",
+        },
+      });
+    }
+    res.json({
+      status: "success",
+      data: {
+        order,
       },
-    },
-  });
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 };
 
 const create = (req, res) => {
