@@ -41,10 +41,16 @@ const login = async (req, res, next) => {
           message: options.message || "Invalid credentials",
         });
       }
+
+      let token = jwt.sign(
+        { uid: user._id, username: user.username },
+        "MySecretSauce"
+      );
+
       res.json({
         status: "success",
         data: {
-          username: user.username,
+          token: token,
         },
       });
     });
