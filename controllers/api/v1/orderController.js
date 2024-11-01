@@ -39,13 +39,18 @@ const orderSchema = new Schema({
 });
 const Order = mongoose.model("Order", orderSchema);
 
-const index = (req, res) => {
-  res.json({
-    status: "success",
-    data: {
-      orders: [],
-    },
-  });
+const index = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.json({
+      status: "success",
+      data: {
+        orders,
+      },
+    });
+  } catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
 };
 
 const getOrderById = (req, res) => {
