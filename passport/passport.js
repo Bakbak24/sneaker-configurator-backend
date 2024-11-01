@@ -1,5 +1,6 @@
 const passport = require("passport");
 const User = require("../models/User");
+const config = require("config");
 
 // LOCAL STRATEGY
 passport.use(User.createStrategy());
@@ -14,7 +15,7 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const opts = {};
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = "MySecretSauce";
+opts.secretOrKey = config.get("jwt.secret");
 
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {

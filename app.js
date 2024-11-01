@@ -8,9 +8,10 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const apiOrdersRouter = require("./routes/api/v1/orders");
 const passport = require("./passport/passport");
+const config = require("config");
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/sneakers-conf");
+mongoose.connect(config.get("Database.conn"));
 
 const app = express();
 
