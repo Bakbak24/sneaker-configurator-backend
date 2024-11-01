@@ -9,6 +9,7 @@ const usersRouter = require("./routes/users");
 const apiOrdersRouter = require("./routes/api/v1/orders");
 
 const mongoose = require("mongoose");
+const passport = require("passport");
 mongoose.connect("mongodb://localhost:27017/sneakers-conf");
 
 const app = express();

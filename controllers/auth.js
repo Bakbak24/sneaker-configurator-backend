@@ -18,6 +18,38 @@ const signup = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    User.authenticate()(username, password, (err, user, options) => {
+      if (err) {
+        return res.json({
+          status: "error",
+          message: err.message,
+        });
+      }
+      if (!user) {
+        return res.json({
+          status: "fail",
+          message: options.message || "Invalid credentials",
+        });
+      }
+      res.json({
+        status: "success",
+        data: {
+          username: user.username,
+        },
+      });
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   signup,
+  login,
 };
