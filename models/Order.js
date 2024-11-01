@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema({
   customerName: {
     type: String,
-    required: true,
   },
   customerEmail: {
     type: String,
