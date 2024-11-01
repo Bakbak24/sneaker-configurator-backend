@@ -134,16 +134,29 @@ const update = async (req, res) => {
   }
 };
 
-const remove = (req, res) => {
-  res.json({
-    status: "success",
-    data: {
-      order: {
-        id: req.params.id,
-        text: "Order deleted",
+const remove = async (req, res) => {
+  try {
+    const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+    if (!deletedOrder) {
+      return res.json({
+        status: "fail",
+        data: {
+          message: "Order not found",
+        },
+      });
+    }
+    res.json({
+      status: "success",
+      data: {
+        order: deletedOrder,
       },
-    },
-  });
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 };
 
 module.exports = {
