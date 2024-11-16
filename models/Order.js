@@ -26,6 +26,10 @@ const orderSchema = new Schema({
     material: { type: String, default: null },
     customText: { type: String, default: null },
   },
+  snapshot: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     enum: ["in productie", "verzonden", "afgehandeld", "geannuleerd"],
