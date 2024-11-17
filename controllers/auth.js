@@ -44,7 +44,7 @@ const login = async (req, res, next) => {
       }
 
       let token = jwt.sign(
-        { uid: user._id, username: user.username },
+        { uid: user._id, username: user.username, role: user.role },
         process.env.secretsauce || config.get("jwt.secret")
       );
 
