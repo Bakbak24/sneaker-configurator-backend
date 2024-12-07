@@ -13,19 +13,19 @@ const orderSchema = new Schema({
     required: true,
   },
   laceColor: {
-    type: String,
+    color: {type: String, default: "white"},
     material: { type: String, default: null },
   },
   soleColor: {
-    type: String,
+    color: {type: String, default: "white"},
     material: { type: String, default: null },
   },
   tongueColor: {
-    type: String,
+    color: {type: String, default: "white"},
     material: { type: String, default: null },
   },
   tipColor: {
-    type: String,
+    color: {type: String, default: "white"},
     material: { type: String, default: null },
   },
   extraOptions: {
