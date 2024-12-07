@@ -14,21 +14,26 @@ const orderSchema = new Schema({
   },
   laceColor: {
     type: String,
-    required: true,
+    material: { type: String, default: null },
   },
   soleColor: {
     type: String,
-    required: true,
+    material: { type: String, default: null },
+  },
+  tongueColor: {
+    type: String,
+    material: { type: String, default: null },
+  },
+  tipColor: {
+    type: String,
+    material: { type: String, default: null },
   },
   extraOptions: {
-    charms: { type: String, default: null },
-    patterns: { type: String, default: null },
-    material: { type: String, default: null },
+    logo: { type: String, default: null },
     customText: { type: String, default: null },
   },
   snapshot: {
     type: String,
-    required: true,
   },
   status: {
     type: String,
