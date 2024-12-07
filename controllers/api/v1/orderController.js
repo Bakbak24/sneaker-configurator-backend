@@ -51,7 +51,6 @@ const create = async (req, res) => {
       tongueColor: req.body.tongueColor,
       tipColor: req.body.tipColor,
       extraOptions: req.body.extraOptions,
-      snapshot: req.body.snapshot,
       status: req.body.status || "in productie",
     });
 
