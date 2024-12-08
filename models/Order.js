@@ -34,7 +34,7 @@ const orderSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["in productie", "verzonden", "afgehandeld", "geannuleerd"],
+    enum: ["in productie", "verzonden", "geannuleerd"],
     default: "in productie",
   },
   createdAt: {
